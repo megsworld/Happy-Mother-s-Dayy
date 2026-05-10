@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#f4f6f1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Mother's Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f4f6f1;
+      --warm-white: #f8faf5;
+      --sage-light: #cdd9c5;
+      --sage: #8aab7e;
+      --sage-deep: #4e7a44;
+      --deep: #1c2d18;
+      --gold: #b8a96a;
+      --muted: #6a7d63;
+      --string: #a3bc9a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--deep);
+      font-family: 'Playfair Display', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 15% 85%, rgba(138,171,126,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 45% at 85% 15%, rgba(184,169,106,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 65% at 50% 50%, rgba(205,217,197,0.18) 0%, transparent 80%);
+      z-index: 0;
+    }
+
+    .petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      opacity: 0.06;
+    }
+    .petal:nth-child(1) { width: 340px; height: 340px; background: var(--sage); top: -70px; left: -90px; }
+    .petal:nth-child(2) { width: 210px; height: 210px; background: var(--gold); bottom: 8%; right: -70px; border-radius: 0 50% 0 50%; }
+    .petal:nth-child(3) { width: 150px; height: 150px; background: var(--sage-light); top: 28%; left: 4%; }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .eyebrow {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.2s forwards;
+    }
+
+    h1 {
+      font-family: 'Cormorant', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 11vw, 8.5rem);
+      line-height: 0.92;
+      color: var(--deep);
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+    }
+
+    h1 em { font-style: italic; color: var(--sage-deep); }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 400px;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--sage-light), transparent);
+      animation: scrollPulse 2s ease-in-out 1.4s infinite;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 2rem;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--sage-light), transparent); }
+    .divider-icon { color: var(--sage-deep); font-size: 1rem; }
+
+    /* ── LETTER ── */
+    .letter-section { padding: 2.5rem 2rem; position: relative; }
+    .letter-wrap { max-width: 660px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Cormorant', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--deep);
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+    h2 em { font-style: italic; color: var(--sage-deep); }
+
+    .letter-body { font-size: 1.05rem; line-height: 2; color: #384d32; }
+    .letter-body p + p { margin-top: 1.5rem; }
+    .letter-body .drop-cap::first-letter {
+      font-family: 'Cormorant', serif;
+      font-size: 4.5em;
+      line-height: 0.75;
+      float: left;
+      margin-right: 0.08em;
+      margin-top: 0.08em;
+      color: var(--sage-deep);
+      font-weight: 300;
+    }
+
+    .letter-signature {
+      margin-top: 1rem;
+      font-family: 'Cormorant', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--sage-deep);
+      opacity: 0.8;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section { padding: 1.5rem 0 2.5rem; position: relative; }
+    .gallery-header { text-align: center; padding: 0 2rem; margin-bottom: 1.5rem; }
+
+    .gallery-scroll-track {
+      touch-action: pan-x;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2rem;
+      padding-top: 1.5rem;
+      cursor: grab;
+    }
+    .gallery-scroll-track:active { cursor: grabbing; }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+
+    .gallery-inner {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 5vw;
+      min-width: max-content;
+    }
+
+    .rod {
+      width: 100%;
+      height: 4px;
+      background: var(--deep);
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(28,45,24,0.18);
+    }
+    .rod::before, .rod::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--deep);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+    .rod::before { left: -6px; }
+    .rod::after  { right: -6px; }
+
+    .frames-row { display: flex; align-items: flex-start; }
+
+    .frame-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px;
+      animation: sway ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    .string {
+      width: 1.5px;
+      background: linear-gradient(to bottom, var(--deep), var(--string));
+      flex-shrink: 0;
+    }
+
+    .frame {
+      border: 2px solid var(--deep);
+      background: var(--warm-white);
+      box-shadow:
+        0 6px 20px rgba(28,45,24,0.13),
+        0 1px 4px rgba(28,45,24,0.08),
+        inset 0 0 0 4px var(--warm-white),
+        inset 0 0 0 5.5px var(--deep);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .frame img, .frame .frame-placeholder { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .frame-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: linear-gradient(135deg, #e8efe4 0%, #dde8d8 50%, #e4ede0 100%);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      padding: 0.75rem;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .frame-placeholder svg { opacity: 0.28; flex-shrink: 0; }
+
+            .frame-slot:nth-child(1) .string { height: 68px; }
+    .frame-slot:nth-child(1) .frame   { transform: rotate(-1.4deg); }
+    .frame-slot:nth-child(1)           { animation-duration: 6.2s; animation-delay: 0.0s; }
+    .frame-slot:nth-child(2) .string { height: 44px; }
+    .frame-slot:nth-child(2) .frame   { transform: rotate(1.1deg); }
+    .frame-slot:nth-child(2)           { animation-duration: 7.8s; animation-delay: -2.1s; }
+    .frame-slot:nth-child(3) .string { height: 90px; }
+    .frame-slot:nth-child(3) .frame   { transform: rotate(-0.7deg); }
+    .frame-slot:nth-child(3)           { animation-duration: 5.6s; animation-delay: -1.3s; }
+    .frame-slot:nth-child(4) .string { height: 52px; }
+    .frame-slot:nth-child(4) .frame   { transform: rotate(1.8deg); }
+    .frame-slot:nth-child(4)           { animation-duration: 8.4s; animation-delay: -3.5s; }
+    .frame-slot:nth-child(5) .string { height: 76px; }
+    .frame-slot:nth-child(5) .frame   { transform: rotate(-1.0deg); }
+    .frame-slot:nth-child(5)           { animation-duration: 6.8s; animation-delay: -0.7s; }
+    .frame-slot:nth-child(6) .string { height: 38px; }
+    .frame-slot:nth-child(6) .frame   { transform: rotate(0.6deg); }
+    .frame-slot:nth-child(6)           { animation-duration: 7.2s; animation-delay: -4.2s; }
+    .frame-slot:nth-child(7) .string { height: 84px; }
+    .frame-slot:nth-child(7) .frame   { transform: rotate(-1.6deg); }
+    .frame-slot:nth-child(7)           { animation-duration: 9.1s; animation-delay: -2.8s; }
+    .frame-slot:nth-child(8) .string { height: 56px; }
+    .frame-slot:nth-child(8) .frame   { transform: rotate(1.3deg); }
+    .frame-slot:nth-child(8)           { animation-duration: 6.5s; animation-delay: -1.7s; }
+    .frame-slot:nth-child(9) .string { height: 70px; }
+    .frame-slot:nth-child(9) .frame   { transform: rotate(-0.5deg); }
+    .frame-slot:nth-child(9)           { animation-duration: 7.5s; animation-delay: -3.1s; }
+    .frame-slot:nth-child(10) .string { height: 60px; }
+    .frame-slot:nth-child(10) .frame   { transform: rotate(0.9deg); }
+    .frame-slot:nth-child(10)           { animation-duration: 8.0s; animation-delay: -2.4s; }
+    .frame-slot:nth-child(11) .string { height: 48px; }
+    .frame-slot:nth-child(11) .frame   { transform: rotate(-1.2deg); }
+    .frame-slot:nth-child(11)           { animation-duration: 6.9s; animation-delay: -4.8s; }
+
+
+
+    .scroll-hint-gallery {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-hint-gallery svg { animation: nudge 2s ease-in-out infinite; }
+    .gallery-caption { text-align: center; margin-top: 1.5rem; font-style: italic; color: var(--muted); font-size: 0.85rem; padding: 0 2rem; }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center;
+      padding: 3.5rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--sage-light);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .closing-ring:nth-child(1) { width: 300px; height: 300px; opacity: 0.3; }
+    .closing-ring:nth-child(2) { width: 500px; height: 500px; opacity: 0.18; }
+    .closing-ring:nth-child(3) { width: 700px; height: 700px; opacity: 0.1; }
+    .closing-content { position: relative; z-index: 1; }
+
+    .closing h2 {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 2rem;
+    }
+    .closing h2 em { color: var(--sage-deep); }
+    .closing p { font-size: 1rem; color: var(--muted); line-height: 1.9; max-width: 480px; margin: 0 auto 3rem; font-style: italic; }
+
+    .heart-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--sage-light);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(138,171,126,0.2);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.6; }
+      50%       { transform: scaleY(0.7); opacity: 1; }
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-0.8deg); }
+      50%       { transform: rotate(0.8deg); }
+    }
+    @keyframes nudge {
+      0%, 100% { transform: translateX(0); }
+      50%       { transform: translateX(5px); }
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(18,28,15,0.9);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: min(94vw, 1000px); max-height: 90svh;
+      object-fit: contain; border-radius: 3px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      animation: lb-in 0.2s ease;
+    }
+    @keyframes lb-in { from { opacity:0; transform:scale(0.93); } to { opacity:1; transform:scale(1); } }
+    #lightbox-close {
+      position: fixed; top: 1rem; right: 1.2rem;
+      font-size: 2.5rem; color: rgba(255,255,255,0.8);
+      cursor: pointer; line-height: 1; user-select: none;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 2.5rem 1.5rem; }
+      .letter-section { padding: 2rem 1.5rem; }
+      .letter-body { font-size: 0.95rem; line-height: 1.85; }
+      h2 { font-size: clamp(1.8rem, 7vw, 2.8rem); margin-bottom: 1rem; }
+      .gallery-section { padding: 1rem 0 2rem; }
+      .gallery-header { margin-bottom: 1.2rem; padding: 0 1.5rem; }
+      .closing { padding: 3rem 1.5rem 2rem; }
+      .closing h2 { font-size: clamp(2rem, 9vw, 3.5rem); }
+      .closing p { font-size: 0.9rem; margin-bottom: 1.5rem; }
+      .divider { margin-bottom: 1.5rem; padding: 0 1.5rem; }
+      footer { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+    </div>
+    <div class="hero-content">
+      <p class="eyebrow">Wishing you a</p>
+      <h1>Happy <em>Mother's</em><br>Day Mumsieee</h1>
+      <p class="hero-sub">Celebrating the blessing that you are to us.</p>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+
+  <section class="letter-section">
+    <div class="letter-wrap">
+      <span class="section-label">Noellie</span>
+       <h2>My biggest <em>cheerleader</em></h2>
+                  <div class="letter-body">
+        <p class="drop-cap">My mumsieeeee — I keep saying you're in that season where your children rise to call you blessed. You've done excellently as a mother, and a friend!</p>
+        <p>Thank you for being an oasis in this dry and hard world. You hold me down always, pointing me in the direction of Christ. Steady! Not shaky. I can easily soar because I know I have you right there with me — my biggest cheerleader!</p>
+        <p>A woman of conviction. You have made my relationship with God so seamless. You've exemplified God as a mother to me. Thank you. Thank you for sacrificing so we could live!</p>
+        <p>Thank you for pouring into me and giving me The Kingdom at every chance. Thank you for creating an atmosphere of peace.</p>
+        <p>You have my heart, my forever bestie. Cheers to another year of no privacy — here's to many more. ❤️</p>
+      </div>
+      <div class="letter-signature">Karine ♡</div>
+    </div>
+  </section>
+
+  
+  <section class="letter-section">
+    <div class="letter-wrap">
+      <span class="section-label">Karine</span>
+       <h2>Thank you for <em>choosing us</em></h2>
+            <div class="letter-body">
+        <p class="drop-cap">Happy Mothers' Day Akorfsss — thank you truly for everything.</p>
+        <p>Your love for us has stood the test of time. Thank you for choosing us.</p>
+        <p>I posted on my status recently that if I ever sold air, you'd buy rubber for packaging for me. I meant it; I still do. Thank you for being a support for everything I'm involved in.</p>
+        <p>Thank you for the years invested. You'll reap in many fold.</p>
+        <p>There's rest and there's ease for you. You're blessed in all things.</p>
+        <p>I love you forever ❤️</p>
+      </div>
+      <div class="letter-signature">Marian ♡</div>
+    </div>
+  </section>
+
+   <section class="letter-section">
+    <div class="letter-wrap">
+      <span class="section-label">Marian</span>
+      <h2>Celebrating you<br> Today and <em>Always</em></h2>
+            <div class="letter-body">
+        <p class="drop-cap">Happy Mother's Day to such an amazing woman.</p>
+        <p>Thank you for the love, kindness, and care you've shown me. You've always treated me like a daughter, and that's something I never take for granted. I appreciate your presence in my life, your advice, your prayers, your friendship, and simply the opportunity to be close to you.</p>
+        <p>You have a big heart and I truly believe meeting you and having you in my life was one of God's gifts to me. Thank you for always making me feel welcomed, supported, and loved.</p>
+        <p>I'm so grateful for you. I hope today reminds you of how deeply appreciated and loved you are. I love you</p>
+      </div>
+      <div class="letter-signature">Marian ♡</div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <span class="section-label">Memories</span>
+      <h2 style="font-family:'Cormorant',serif; font-weight:300; font-size:clamp(2rem,5vw,3.5rem); color:var(--deep);">Good times worth <em>keeping</em></h2>
+    </div>
+
+    <div class="gallery-scroll-track" id="galleryTrack">
+      <div class="gallery-inner">
+        <div class="rod"></div>
+        <div class="frames-row">
+
+          <div class="frame-slot" style="animation-duration:6.2s;animation-delay:0.0s;">
+            <div class="string" style="height:68px;"></div>
+            <div class="frame" style="width:90px;height:112px;transform:rotate(-1.4deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image1.jpg')"><img src="mumsie pics/image1.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:7.8s;animation-delay:-2.1s;">
+            <div class="string" style="height:44px;"></div>
+            <div class="frame" style="width:90px;height:120px;transform:rotate(1.1deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image2.jpg')"><img src="mumsie pics/image2.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:5.6s;animation-delay:-1.3s;">
+            <div class="string" style="height:90px;"></div>
+            <div class="frame" style="width:90px;height:120px;transform:rotate(-0.7deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image3.jpg')"><img src="mumsie pics/image3.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:8.4s;animation-delay:-3.5s;">
+            <div class="string" style="height:52px;"></div>
+            <div class="frame" style="width:109px;height:82px;transform:rotate(1.8deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image4.jpeg')"><img src="mumsie pics/image4.jpeg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:6.8s;animation-delay:-0.7s;">
+            <div class="string" style="height:76px;"></div>
+            <div class="frame" style="width:90px;height:120px;transform:rotate(-1.0deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image5.jpg')"><img src="mumsie pics/image5.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:7.2s;animation-delay:-4.2s;">
+            <div class="string" style="height:38px;"></div>
+            <div class="frame" style="width:109px;height:82px;transform:rotate(0.6deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image6.jpg')"><img src="mumsie pics/image6.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:9.1s;animation-delay:-2.8s;">
+            <div class="string" style="height:84px;"></div>
+            <div class="frame" style="width:90px;height:160px;transform:rotate(-1.6deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image7.jpg')"><img src="mumsie pics/image7.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:6.5s;animation-delay:-1.7s;">
+            <div class="string" style="height:56px;"></div>
+            <div class="frame" style="width:146px;height:82px;transform:rotate(1.3deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image8.jpg')"><img src="mumsie pics/image8.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:7.5s;animation-delay:-3.1s;">
+            <div class="string" style="height:70px;"></div>
+            <div class="frame" style="width:90px;height:99px;transform:rotate(-0.5deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image9.jpg')"><img src="mumsie pics/image9.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:8.0s;animation-delay:-2.4s;">
+            <div class="string" style="height:60px;"></div>
+            <div class="frame" style="width:109px;height:82px;transform:rotate(0.9deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image10.jpg')"><img src="mumsie pics/image10.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+          <div class="frame-slot" style="animation-duration:6.9s;animation-delay:-4.8s;">
+            <div class="string" style="height:48px;"></div>
+            <div class="frame" style="width:109px;height:82px;transform:rotate(-1.2deg);cursor:zoom-in;" onclick="openLB('mumsie pics/image11.jpg')"><img src="mumsie pics/image11.jpg" alt="photo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+
+        </div>
+      </div><!-- /gallery-inner -->
+    </div><!-- /scroll-track -->
+    </div>
+    </div>
+
+    <div class="scroll-hint-gallery">
+      <span>Swipe to see more</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="closing-ring"></div>
+    <div class="closing-ring"></div>
+    <div class="closing-ring"></div>
+    <div class="closing-content">
+      <h2>Happy Mother's Day<br><em>Thank you for who you are to us</em></h2>
+      <p>May God bless you always and grant you all your heart's desires.</p>
+      <div class="heart-badge">
+        <span>✦</span>
+        <span>With gratitude & love</span>
+        <span>✦</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>Made with love &nbsp;♡&nbsp; Mother's day 2026</footer>
+  <div id="lightbox">
+    <span id="lightbox-close" onclick="closeLB()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <script>
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    function openLB(src) { lbImg.src = src; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeLB()   { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+
+    const track = document.getElementById('galleryTrack');
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => { isDown = true; track.style.cursor = 'grabbing'; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mouseup',    () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mousemove',  e => { if (!isDown) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX); });
+    track.addEventListener('scroll', () => { const h = track.nextElementSibling; h.style.opacity='0'; h.style.transition='opacity 0.4s'; }, { once: true });
+  </script>
+</body>
+</html>
